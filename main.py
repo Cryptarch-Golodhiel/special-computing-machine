@@ -1,3 +1,11 @@
+'''
+main.py
+
+Special Computing Machine
+(Breakout Game)
+E. Rogers & A. Van Dam 2021
+'''
+
 # Import the pygame library and intialize the game engine.
 import pygame
 from paddle import Paddle

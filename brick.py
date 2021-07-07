@@ -1,3 +1,11 @@
+'''
+brick.py
+
+Special Computing Machine
+(Breakout Game)
+E. Rogers & A. Van Dam 2021
+'''
+
 import pygame
 
 BLACK = (0, 0, 0)

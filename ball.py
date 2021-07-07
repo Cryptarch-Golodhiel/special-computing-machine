@@ -1,3 +1,11 @@
+'''
+ball.py
+
+Special Computing Machine
+(Breakout Game)
+E. Rogers & A. Van Dam 2021
+'''
+
 import pygame
 import random
 from random import randint
