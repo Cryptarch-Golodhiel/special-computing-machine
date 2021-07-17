@@ -15,13 +15,12 @@ from brick import Brick
 pygame.init()
 
 # Define some colors
-DARKBLUE = (0, 63, 99)
-YELLOW = (242, 177, 56)
-WHITE = (217, 217, 217)
-GREY = (161, 165, 166)
-CHARCOAL = (53, 61, 64)
-GREEN = (102, 140, 74)
-ORANGE = (242, 100, 41)
+PIGMENTBLUE = (42, 52, 146)
+AUREOLIN = (246, 235, 20)
+OFFWHITE = (217, 217, 217)
+CINNABAR = (239, 68, 35)
+APPLE = (79, 175, 68)
+DEEPSAFFRON = (255, 149, 38)
 MAGENTA = (255, 0, 127)
 
 score = 0
@@ -36,19 +35,21 @@ pygame.display.set_caption("Breakout Game")
 all_sprites = pygame.sprite.Group()
 
 # Instantiate the paddle
-paddle = Paddle(YELLOW, 100, 25)
+paddle = Paddle(OFFWHITE, 100, 25)
 paddle.rect.x = 350
 paddle.rect.y = 560
+all_sprites.add(paddle)
 
 # Instantiate the ball
-ball = Ball(WHITE, 10, 10)
+ball = Ball(MAGENTA, 10, 10)
 ball.rect.x = 345
 ball.rect.y = 560
+all_sprites.add(ball)
 
 # Create brick wall
 all_bricks = pygame.sprite.Group()
 row_spacing = 60
-for color in [CHARCOAL, GREY, GREEN]:
+for color in [CINNABAR, DEEPSAFFRON, APPLE, AUREOLIN]:
     for i in range(7):
         brick = Brick(color, 80, 30)
         brick.rect.x = 60 + i * 100
@@ -56,10 +57,6 @@ for color in [CHARCOAL, GREY, GREEN]:
         all_sprites.add(brick)
         all_bricks.add(brick)
     row_spacing += 40
-
-
-all_sprites.add(paddle)
-all_sprites.add(ball)
 
 # The main program loop
 carryOn = True
@@ -94,7 +91,7 @@ while carryOn:
         lives -= 1
         if lives == 0:
             font = pygame.font.Font(None, 74)
-            text = font.render("GAME OVER", 1, WHITE)
+            text = font.render("GAME OVER", 1, OFFWHITE)
             screen.blit(text, (250, 300))
             pygame.display.flip()
             pygame.time.wait(3000)
@@ -117,7 +114,7 @@ while carryOn:
 
         if len(all_bricks) == 0:
             font = pygame.font.Font(None, 74)
-            text = font.render("LEVEL COMPLETE", 1, WHITE)
+            text = font.render("LEVEL COMPLETE", 1, OFFWHITE)
             screen.blit(text, (200, 300))
             pygame.display.flip()
             pygame.time.wait(3000)
@@ -128,13 +125,13 @@ while carryOn:
         ball.velocity[1] += 1
 
     # Refreshing Screen
-    screen.fill(DARKBLUE)
-    pygame.draw.line(screen, WHITE, [0, 38], [800, 38], 2)
+    screen.fill(PIGMENTBLUE)
+    pygame.draw.line(screen, OFFWHITE, [0, 38], [800, 38], 2)
     font = pygame.font.Font(None, 34)
-    text = font.render("Score: " + str(score), 1, WHITE)
+    text = font.render("Score: " + str(score), 1, OFFWHITE)
     screen.blit(text, (20, 10))
 
-    text = font.render("Lives: " + str(lives), 1, WHITE)
+    text = font.render("Lives: " + str(lives), 1, OFFWHITE)
     screen.blit(text, (650, 10))
 
     # Draw sprites
