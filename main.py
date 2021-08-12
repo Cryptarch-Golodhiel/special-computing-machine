@@ -23,6 +23,9 @@ APPLE = (79, 175, 68)
 DEEPSAFFRON = (255, 149, 38)
 MAGENTA = (255, 0, 127)
 
+# Set up sounds.
+brickHitSound = pygame.mixer.Sound('blockHit.wav')
+
 score = 0
 lives = 3
 
@@ -109,6 +112,7 @@ while carryOn:
     brick_collisions = pygame.sprite.spritecollide(ball, all_bricks, False)
     for brick in brick_collisions:
         ball.bounce()
+        brickHitSound.play()
         score += 1
         brick.kill()
 
