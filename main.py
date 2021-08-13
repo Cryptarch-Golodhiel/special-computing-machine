@@ -7,7 +7,7 @@ E. Rogers & A. Van Dam 2021
 '''
 
 # Import the pygame library and intialize the game engine.
-import pygame
+import pygame, util
 from paddle import Paddle
 from ball import Ball
 from brick import Brick
@@ -24,14 +24,21 @@ DEEPSAFFRON = (255, 149, 38)
 MAGENTA = (255, 0, 127)
 
 # Set up sounds.
+startupSound = pygame.mixer.Sound('startup.wav')
 brickHitSound = pygame.mixer.Sound('blockHit.wav')
 
+# Set up font.
+fontBasic = pygame.font.SysFont(None, 48)
+fontItalic = pygame.font.SysFont('Arial', 48, False, True)
+
 score = 0
-lives = 3
+lives = 500 # ( for testing ;) )# 3
 
 # Open a new window
-size = (800, 600)
-screen = pygame.display.set_mode(size)
+WINDOW_WIDTH = 800
+WINDOW_HEIGHT = 600
+#size = (800, 600)
+screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))#size)
 pygame.display.set_caption("Breakout Game")
 
 # List of all sprites
@@ -61,6 +68,14 @@ for color in [CINNABAR, DEEPSAFFRON, APPLE, AUREOLIN]:
         all_bricks.add(brick)
     row_spacing += 40
 
+# Display the "Start" Screen
+screen.fill(MAGENTA)
+startupSound.play()
+util.drawText('~*~ BREAKOUT ~*~', fontItalic, screen, (WINDOW_WIDTH / 3), (WINDOW_HEIGHT / 3))
+util.drawText('Press any key to start!', fontBasic, screen, (WINDOW_WIDTH / 3) - 30, (WINDOW_HEIGHT / 3) +50)
+pygame.display.update()
+util.waitForUserKeypress()
+
 # The main program loop
 carryOn = True
 
@@ -70,7 +85,7 @@ while carryOn:
     # Capturing Events
     for event in pygame.event.get(): # User did something
         if event.type == pygame.QUIT:
-            carryOn = False
+            util.terminate()#carryOn = False
 
     # Move paddle with arrows
     keys = pygame.key.get_pressed()
